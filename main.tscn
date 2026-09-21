@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://main.gd" id="1"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1")
+
+[node name="player" type="CharacterBody2D" parent="."]
+position = Vector2(400, 300)
+
+[node name="playershape" type="CollisionShape2D" parent="player"]
+
+[node name="playersprite" type="Polygon2D" parent="player"]
+color = Color(0.2, 0.8, 0.3, 1)
+polygon = PackedVector2Array(-12, -12, 12, -12, 12, 12, -12, 12)
+
+[node name="background" type="ColorRect" parent="."]
+z_index = -10
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 800.0
+offset_bottom = 600.0
+color = Color(0.15, 0.2, 0.15, 1)
+
+[node name="scorelabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 300.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 24
+text = "Score: 0"
+
+[node name="enemytimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="collectibletimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="difficultytimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="gameover" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="panel" type="ColorRect" parent="gameover"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.7)
+
+[node name="gameoverlabel" type="Label" parent="gameover"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -80.0
+offset_right = 150.0
+offset_bottom = -40.0
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 36
+text = "GAME OVER"
+
+[node name="finalscorelabel" type="Label" parent="gameover"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -20.0
+offset_right = 100.0
+offset_bottom = 10.0
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 22
+text = "Score: 0"
+
+[node name="restartbutton" type="Button" parent="gameover"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = 30.0
+offset_right = 60.0
+offset_bottom = 65.0
+text = "Restart"
+
+[connection signal="timeout" from="enemytimer" to="." method="spawnenemy"]
+[connection signal="timeout" from="collectibletimer" to="." method="spawncollectible"]
+[connection signal="timeout" from="difficultytimer" to="." method="increasedifficulty"]
+[connection signal="pressed" from="gameover/restartbutton" to="." method="restart"]

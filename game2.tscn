@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://game2.gd" id="1"]
+
+[node name="game2" type="Node2D"]
+script = ExtResource("1")
+
+[node name="background" type="ColorRect" parent="."]
+z_index = -10
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 800.0
+offset_bottom = 600.0
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="scorelabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 300.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 24
+text = "Score: 0"
+
+[node name="goallabel" type="Label" parent="."]
+offset_left = 600.0
+offset_top = 10.0
+offset_right = 790.0
+offset_bottom = 40.0
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.6, 0.6, 0.6, 1)
+text = "goal: 20 clicks"
+
+[node name="spawntimer" type="Timer" parent="."]
+wait_time = 1.2
+autostart = true
+
+[node name="difficultytimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="timeout" from="spawntimer" to="." method="spawntile"]
+[connection signal="timeout" from="difficultytimer" to="." method="increasedifficulty"]
