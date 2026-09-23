@@ -1,4 +1,4 @@
-# [Itch link](pahal-desai.itch.io/dont-touch-red)
+# [Itch link](https://pahal-desai.itch.io/dont-touch-red)
 
 # Dont touch the red!
 
